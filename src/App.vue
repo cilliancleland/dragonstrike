@@ -3,7 +3,7 @@
     <h1>Dragon strike list builder</h1>
     <div class="leftright">
       <button @click="addDragon" type="button">Add dragon</button>
-      <button type="button" @click="window.print()">Print</button>
+      <button type="button" @click="print">Print</button>
       <div :class="totalPointsClass">
         {{ totalPoints }} / 15 points
       </div>
@@ -41,6 +41,9 @@ export default {
       dragons: [],
       showAddDragon: false,
     });
+    const print = () => {
+      window.print();
+    };
     const addDragon = () => {
       state.showAddDragon = true;
     };
@@ -110,6 +113,7 @@ export default {
     return {
       state,
       addDragon,
+      print,
       funcs: {
         createDragon,
         removeDragon,

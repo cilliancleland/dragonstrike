@@ -110,10 +110,10 @@ export default {
   height: 100%;
 }
 .dialog{
-
+  padding: 20px;
   margin: auto;
-    background-color: white;
-    width: auto;
-    display: inline-block;
+  background-color: white;
+  width: auto;
+  display: inline-block;
 }
 </style>
