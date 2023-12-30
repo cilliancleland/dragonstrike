@@ -3,6 +3,11 @@
     <h3>
       {{ dragon.age }} {{ dragon.race }} Dragon ({{ dragon.element }})
     </h3>
+    <div class="leftright">
+      <div>&nbsp;<strong>POT:</strong>{{ dragon.pot }}&nbsp;</div>
+      <div>&nbsp;<strong>FLI:</strong>{{ dragon.fli }}&nbsp;</div>
+      <div>&nbsp;<strong>WND:</strong>{{ dragon.wnd }}&nbsp;</div>
+    </div>
     <div>
       {{ totalCost }} Pts.
       <button type="button" class="trash" @click="myRemoveDragon">
@@ -12,12 +17,7 @@
   </div>
 </template>
 <script>
-// import {reactive} from 'vue';
 import { dragonCost } from '../data/helpers';
-// import {
-//   racialTraits,
-//   racialElements,
-// } from '../data/data';
 
 export default {
   name: 'dragonHead',

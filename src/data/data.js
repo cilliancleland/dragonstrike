@@ -98,7 +98,7 @@ export const traits = {
     advanced: '+1 flight when doing BLUE (effective) manouvres (add to basic)',
   },
   "Deep Breath": {
-    basic: '+1 DR DMG when breathing at range 1 straight away',
+    basic: '+1 DR DMG when breathing at range 1 straight ahead',
     advanced: '+1 DR DMG when breathing at range 1 or 2 straight ahead',
   },
   "Quick Recovery": {
