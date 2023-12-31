@@ -58,7 +58,6 @@ export default {
   computed: {
     traitList() {
       const arr = Object.keys(traits);
-      console.log('arr', arr);
       return arr.filter((el) => {
         return !this.dragon.extraTraits.includes(el) && !this.dragon.traits.includes(el);
       });

@@ -2,15 +2,15 @@
   <span class="trait-name">
     <strong>{{ traitName }}</strong>
   </span>
-  (<input type="checkbox" @change="myAdvanceTrait" :id="checkBoxId" />
+  (<input type="checkbox" @change="myAdvanceTrait" :id="checkBoxId" :checked="isAdvanced" />
   <label :for="checkBoxId">{{ checkBoxLabel }}</label> )
   <button type="button" @click="myRemoveTrait" v-if="traitType==='extraTraits'">x</button>
   <ul>
     <li>
-      {{ basic }}
+      {{ basicText }}
     </li>
     <li v-if="isAdvanced">
-      {{ advanced }}
+      {{ advancedText }}
     </li>
   </ul>
 </template>
@@ -58,11 +58,10 @@ export default {
     };
   },
   computed: {
-    basic() {
-      console.log(this.traitName);
+    basicText() {
       return traits[this.traitName].basic;
     },
-    advanced() {
+    advancedText() {
       return traits[this.traitName].advanced;
     },
     isAdvanced() {
@@ -72,7 +71,6 @@ export default {
       return this.isAdvanced ? 'Advanced' : 'basic';
     },
     checkBoxId() {
-      console.log(this.traitName, this.dragon.id);
       return `${this.traitName} + ${this.dragon.id}`;
     },
   }

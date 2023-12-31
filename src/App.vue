@@ -1,21 +1,21 @@
 <template>
   <div class="main">
-    <h1>Dragon strike list builder</h1>
+    <h1>DragonStrike Wing builder</h1>
+    <span v-if="showWingName">{{ state.wingName }}</span>
     <div class="leftright">
-      <button @click="addDragon" type="button">Add dragon</button>
+      <button @click="() => toggleDialog('addDragon')" type="button">Add dragon</button>
+      <button @click="() => toggleDialog('saveLoad')" type="button">Save/Load</button>
       <button type="button" @click="print">Print</button>
       <div :class="totalPointsClass">
         {{ totalPoints }} / 15 points
       </div>
-      </div>
+    </div>
     <Dragon v-for="dragon in state.dragons"
       :key="dragon.id"
       :dragon="dragon"
       :funcs="funcs"
       />
-    <AddDragon 
-      v-if="state.showAddDragon"
-      :funcs="funcs" />
+    <component :is="state.dialog" v-if="state.dialog" :funcs="funcs" :state="state" />
   </div>
 </template>
 <script>
@@ -29,26 +29,46 @@ import {
 import { dragonCost } from './data/helpers';
 import Dragon from './components/Dragon.vue';
 import AddDragon from './components/AddDragon.vue';
+import SaveLoad from './components/SaveLoad.vue';
 
 export default {
   name: 'dragonStrike',
   components: {
     Dragon,
     AddDragon,
+    SaveLoad,
   },
   setup() {
     const state = reactive({
       dragons: [],
-      showAddDragon: false,
+      dialog: '',
+      wingName: 'New Dragon Wing',
     });
+    const saveWing = () => {
+      const savesStr = localStorage.getItem("saves") || '{}';
+      const saves = JSON.parse(savesStr);
+      const saveNames = Object.keys(saves);
+      const saveName = state.wingName;
+      if (saveNames.includes(saveName)) {
+        if (!confirm(`Are you sure you want to replace ${saveName}?`)) {
+          return;
+        }
+      }
+      saves[saveName] = state.dragons;
+      localStorage.setItem("saves", JSON.stringify(saves));
+    };
+    const loadWing = (name) => {
+      const savesStr = localStorage.getItem("saves") || '{}';
+      const saves = JSON.parse(savesStr);
+      const save = saves[name];
+      state.dragons = save;
+      state.wingName = name;
+    };
     const print = () => {
       window.print();
     };
-    const addDragon = () => {
-      state.showAddDragon = true;
-    };
-    const cancelAdd = () => {
-      state.showAddDragon = false;
+    const toggleDialog = (dialog) => {
+      state.dialog = dialog;
     };
     const createDragon = (age, race) => {
       const selected = dragonTypes[age];
@@ -63,10 +83,12 @@ export default {
         dragon.traits[raceIndex] = racialTraits[race];
       }
       dragon.element = racialElements[race];
-      state.showAddDragon = false;
+      state.dialog = '';
     };
     const removeDragon = (id) => {
       state.dragons.splice(id, 1);
+      // fix the ids
+      state.dragons.forEach((el, index) => el.id = index)
     };
     const addTrait = (id, trait) => {
       state.dragons[id].extraTraits.push(trait);
@@ -110,20 +132,31 @@ export default {
         dragon.advancedSkills.splice(index, 1);
       }
     };
+    const updateName = (id, value, name) => {
+      if (name === 'wingName') {
+        state.wingName = value;
+      } else {
+        const dragon = state.dragons[id];
+        dragon[name] = value;
+      }
+    };
     return {
       state,
-      addDragon,
+      toggleDialog,
       print,
       funcs: {
         createDragon,
         removeDragon,
-        cancelAdd,
+        toggleDialog,
         addTrait,
         removeTrait,
         advanceTrait,
         addSkill,
         removeSkill,
         advanceSkill,
+        updateName,
+        saveWing,
+        loadWing,
       },
     };
   },
@@ -140,7 +173,10 @@ export default {
       if (this.totalPoints > 15 ) return 'red';
       if (this.totalPoints === 15 ) return 'green';
       return 'black';
-    }
+    },
+    showWingName() {
+      return this.state.wingName !== 'New Dragon Wing'
+    },
   },
 }
 </script>

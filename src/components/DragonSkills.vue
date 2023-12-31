@@ -51,7 +51,6 @@ export default {
   computed: {
     skillList() {
       const arr = Object.keys(skills);
-      console.log('arr', arr);
       return arr.filter((el) => {
         return !this.dragon.skills.includes(el);
       });

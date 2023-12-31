@@ -3,9 +3,9 @@
   display: flex;
   justify-content: space-between
 }
-
-.trait-name {
-
+.spaced {
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 li, ul, h4, h3, h1 {
   margin-top: 0px;
@@ -23,6 +23,22 @@ select {
 .dragon-box {
   border: solid 1px black;
   margin-bottom: 10px;
+}
+.cover {
+  background-color: black;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  height: 100%;
+}
+.dialog{
+  padding: 20px;
+  margin: auto;
+  background-color: white;
+  width: auto;
+  display: inline-block;
 }
 
 @media print {

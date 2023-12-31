@@ -13,6 +13,8 @@ export const dragonTypes = {
     advancedTraits: [],
     skills: [],
     advancedSkills: [],
+    dragonName: '',
+    riderName: '',
   },
   Adult: {
     age: 'Adult',
@@ -29,8 +31,8 @@ export const dragonTypes = {
     skills: [],
     advancedSkills: [],
   },
-  Ancient: {
-    age: 'Ancient',
+  Elder: {
+    age: 'Elder',
     baseCost: 8,
     pot: 3,
     fli: 5,
@@ -49,31 +51,31 @@ export const dragonTypes = {
 export const dragonAges = [
   'Young',
   'Adult',
-  'Ancient'
+  'Elder'
 ];
 export const racialTraits = {
-  gold: 'Trickster',
-  silver: 'Quick Recovery',
-  bronze: 'Deep Breath',
-  copper: 'Breaker',
-  brass: 'Zoomer',
-  red: 'Deep Breath',
-  blue: 'Quick Recovery',
-  black: 'Hazard Expert',
-  white: 'Breaker',
-  green: 'Trickster',
+  Gold: 'Trickster',
+  Silver: 'Quick Recovery',
+  Bronze: 'Deep Breath',
+  Copper: 'Breaker',
+  Brass: 'Zoomer',
+  Red: 'Deep Breath',
+  Blue: 'Quick Recovery',
+  Black: 'Hazard Expert',
+  White: 'Breaker',
+  Green: 'Trickster',
 };
 export const racialElements = {
-  gold: 'Fire',
-  silver: 'Frost',
-  bronze: 'Lightening',
-  copper: 'Poison',
-  brass: 'Fire',
-  red: 'Fire',
-  blue: 'Lightening',
-  black: 'Poison',
-  white: 'Frost',
-  green: 'Posion',
+  Gold: 'Fire',
+  Silver: 'Frost',
+  Bronze: 'Lightning',
+  Copper: 'Poison',
+  Brass: 'Fire',
+  Red: 'Fire',
+  Blue: 'Lightning',
+  Black: 'Poison',
+  White: 'Frost',
+  Green: 'Posion',
 };
 
 export const traits = {
@@ -114,7 +116,7 @@ export const damageTypes = [
   'Fire',
   'Frost',
   'Poison',
-  'Lightening',
+  'Lightning',
 ];
 export const skills = {
   Armoured: {

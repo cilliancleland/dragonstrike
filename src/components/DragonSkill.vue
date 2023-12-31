@@ -2,15 +2,15 @@
   <span class="trait-name">
     <strong>{{ skillName }}</strong> <span v-if="skillIndex===0"> (free)</span>
   </span>
-    (<input type="checkbox" @change="myAdvanceSkill" :id="dragon.id + skillName" />
-    <label :for="dragon.id + skillName">{{ checkBoxLabel }}</label> )
+    (<input type="checkbox" @change="myAdvanceSkill" :id="checkBoxId"  :checked="isAdvanced"/>
+    <label :for="checkBoxId">{{ checkBoxLabel }}</label> )
     <button type="button" @click="myRemoveSkill">x</button>
   <ul>
     <li>
-      {{ basic }}
+      {{ basicText }}
     </li>
     <li v-if="isAdvanced">
-      {{ advanced }}
+      {{ advancedText }}
     </li>
   </ul>
 </template>
@@ -20,7 +20,6 @@
 import {
   skills,
 } from '../data/data';
-import DragonSkill from './DragonSkill.vue';
 
 export default {
   name: 'dragonSkill',
@@ -41,6 +40,10 @@ export default {
       type: Number,
       required: true,
     },
+    advanced: {
+      type: Boolean,
+      required: true,
+    },
   },
   setup(props) {
     const myRemoveSkill = () => {
@@ -55,10 +58,10 @@ export default {
     };
   },
   computed: {
-    basic() {
+    basicText() {
       return skills[this.skillName].basic;
     },
-    advanced() {
+    advancedText() {
       return skills[this.skillName].advanced;
     },
     isAdvanced() {
@@ -66,6 +69,9 @@ export default {
     },
     checkBoxLabel() {
       return this.isAdvanced ? 'Advanced' : 'basic';
+    },
+    checkBoxId() {
+      return `${this.skillName} + ${this.dragon.id}`;
     },
   }
 };

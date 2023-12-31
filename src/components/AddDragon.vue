@@ -12,8 +12,8 @@
           <label for="age_Adult">Adult</label>
         </div>
         <div>
-          <input type="radio" name="age" value="Ancient"  id="age_Ancient" @change="setAge"/>
-          <label for="age_Ancient">Ancient</label>
+          <input type="radio" name="age" value="Elder"  id="age_Elder" @change="setAge"/>
+          <label for="age_Elder">Elder</label>
         </div>
       </div>
       <div style="margin-top:20px">
@@ -51,7 +51,7 @@ import {
 } from '../data/data';
 
 export default {
-  name: 'DragonCard',
+  name: 'AddDragon',
   components: {
   },
   props: {
@@ -75,7 +75,7 @@ export default {
       props.funcs.createDragon(state.age, state.race);
     };
     const cancel = () => {
-      props.funcs.cancelAdd();
+      props.funcs.toggleDialog('');
     };
     return {
       cancel,
@@ -98,22 +98,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.cover {
-  background-color: black;
-  width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: flex;
-  height: 100%;
-}
-.dialog{
-  padding: 20px;
-  margin: auto;
-  background-color: white;
-  width: auto;
-  display: inline-block;
-}
-</style>
